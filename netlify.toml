@@ -1,8 +1,18 @@
 [build]
   command = "npm start"
   publish = "dist"
+
+[context.environment.variables]
+  NODE_ENV = "production"
+
+[[redirects]]
+  from = "/*"
+  to = "/.netlify/functions/:path"
+  status = 200
+  force = true
+
+[[headers]]
+  for = "/_next/*"
+  [headers.values]
+    cache-control = "public, max-age=7200"
  
-[context]
-  [context.production]
-    command = "npm run build"
-    publish = "dist"
