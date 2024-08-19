@@ -1,3 +1,6 @@
+```
+npm i
+```
 npm i
 启动
 npm start
