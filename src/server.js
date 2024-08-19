@@ -29,7 +29,7 @@ const sendEmail = async (options) => {
         console.log('Email sent: ' + info.response);
         return 'success';
     } catch (error) {
-        console.log(error);
+        console.log(error.response);
         return 'fail';
     }
 }
