@@ -1,5 +1,5 @@
 ```
-npm i
+npm install
 ```
 启动
 ```
