@@ -4,6 +4,9 @@ const nodemailer = require('nodemailer');
 const fs = require('fs');
 const Handlebars = require('handlebars');
 
+// const path = require('path');
+// console.log(path.join(__dirname, '/tpl'));
+
 /**
  * 邮件配置
  */
@@ -39,7 +42,7 @@ const mailOptions = {
  */
 function getTpl(options){
   // 读取模板文件
-  const source = fs.readFileSync('src/tpl/template.hbs', 'utf8');
+  const source = fs.readFileSync('./tpl/template.hbs', 'utf8');
   // 编译模板
   const template = Handlebars.compile(source);
   // 渲染模板

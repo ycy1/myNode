@@ -6,3 +6,4 @@ dist
 public
 .env
 .log
+.tar
