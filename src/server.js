@@ -1,6 +1,8 @@
 const express = require('express');  
 const app = express();  
 const nodemailer = require('nodemailer');  
+const fs = require('fs');
+const Handlebars = require('handlebars');
 
 /**
  * 邮件配置
@@ -20,23 +22,50 @@ const mailOptions = {
     to: "2039916844@qq.com",
     subject: '主题',
     html: "内容",
+    attachments: [
+      {
+          filename: 'attachment.txt', // 附件文件名
+          path: 'src/file/test.txt' // 附件文件路径
+      }
+  ]
 }
     
+
+
+/**
+ * 渲染模板内容
+ * @param {*} options 
+ * @returns 
+ */
+function getTpl(options){
+  // 读取模板文件
+  const source = fs.readFileSync('src/tpl/template.hbs', 'utf8');
+  // 编译模板
+  const template = Handlebars.compile(source);
+  // 渲染模板
+  const output = template(options.data);
+  return output; // 返回渲染后的模板内容
+}
+
+
+
   
 const sendEmail = async (options) => {
     try {
+        options.html = getTpl(options);
         const info = await transporter.sendMail(options);
         console.log('Email sent: ' + info.response);
         return 'success';
     } catch (error) {
-        console.log(error.response);
-        return 'fail';
+        console.log(error);
+        return error.response;
     }
 }
 
 
 
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
+const { log } = require('console');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use((req, respn, next) => {
@@ -49,7 +78,7 @@ app.use((req, respn, next) => {
 app.post('/send', (req, respn) => {  
   respn.header('Access-Control-Allow-Origin', '*')
   const formData = req.body;
-//   console.log(formData);
+  console.log(formData);
   sendEmail(formData).then(res => {
     respn.send(res);
   });

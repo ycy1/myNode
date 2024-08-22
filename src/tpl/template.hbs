@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>公众号兑换卡密</title>
+    <style>
+        body, div, p, ul, li, a {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            text-decoration: none;
+        }
+        .wrap {
+            width: 750px;
+            height: 100%;
+            margin: 0 auto;
+        }
+
+        nav {
+            font-weight: 700;
+            padding: 20px 20px;
+            box-sizing: border-box;
+            background: #f9f9f9;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .nav-title {
+            margin: 0 0 20px;
+            color: coral;
+            font-size: 20px;
+        }
+
+
+        #personal-info {
+            flex: 1;
+            padding: 20px;
+            background-color: #f0f0f0;
+            font-size: 16px;
+            border-radius: 0 0 20px 20px;
+            line-height: 2.5;
+            font-style: italic;
+            color: darkslategray;
+          }
+          #personal-info span {
+            color: dimgrey;
+            font-style: normal;
+          }
+          
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <!-- 上部分导航 -->
+    <nav>
+        <img src="https://s21.ax1x.com/2024/08/22/pAi672d.png" alt="pAi672d.png" border="0" width="50"/>
+        <p class="nav-title">来自xxjgbloggood的反馈邮件</p>
+    </nav>
+    <!-- 下部分列表数据 -->
+    <div class="personal-info" id="personal-info">
+        <p>姓名：<span>{{name}}</span></p>
+        <p>邮箱：<span>{{email}}</span></p>
+        <p>手机号码：<span>{{phone}}</span></p>
+        <p>详情：<span>{{detail}}</span></p>
+    </div>
+</div>
+</body>
+</html>
