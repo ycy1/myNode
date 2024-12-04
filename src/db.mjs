@@ -5,7 +5,7 @@ import * as T from "./schema.mjs";
 const connection = await mysql.createConnection({
   host: '182.92.85.80', // 主机地址
   user: 'root', // 用户名
-  password: '03171122991j!', // 密码
+  password: 'xxxxxxxx', // 密码
   port: 3306, // 端口号，默认为 3306
   database: 'xxj_gblog', // 数据库名称
   charset: "UTF8_GENERAL_CI", // 连接字符集，默认为 UTF8_GENERAL_CI
