@@ -3,6 +3,8 @@ const app = express();
 const nodemailer = require('nodemailer');  
 const fs = require('fs');
 const Handlebars = require('handlebars');
+// const db = import('./db.mjs');
+// const { save_email_log } = import('./db.mjs');
 
 // const path = require('path');
 // console.log(path.join(__dirname, '/tpl'));
@@ -68,7 +70,6 @@ const sendEmail = async (options) => {
 
 
 var bodyParser = require('body-parser');
-const { log } = require('console');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use((req, respn, next) => {
@@ -82,10 +83,26 @@ app.post('/send', (req, respn) => {
   respn.header('Access-Control-Allow-Origin', '*')
   const formData = req.body;
   console.log(formData);
-  sendEmail(formData).then(res => {
+  sendEmail(formData).then(async res => {
+    // 添加数据库保存日志
+    const { save_email_log } = await import('./db.mjs');
+    save_email_log({
+      email: formData.data.email,
+      name: formData.data.name,
+      mobile: formData.data.phone,
+      content: formData.data.detail,
+      ip: req.ip
+    })
+
+    
     respn.send(res);
   });
 });  
+
+app.get('/', (req, res) => {
+  const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  res.send('Hello, Express!'+ ip);
+});
    
 const PORT = process.env.PORT || 3000;
 // 启动服务  
